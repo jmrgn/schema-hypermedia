@@ -60,7 +60,8 @@ namespace Schema.Hypermedia.Test
             additional = new Dictionary<string, string>
             {
                 {"{nonsense}", "still_nonsense"},
-                {"{test}", "testing"}
+                {"{test}", "testing"},
+                {"nobraces", "no-braces"}
             };
         }
 
@@ -104,7 +105,6 @@ namespace Schema.Hypermedia.Test
         {
             var links = generator.GetLinksFromSchema(schema);
             Assert.That(links.Count, Is.EqualTo(expectedCount));
-
         }
 
         [Test]
@@ -117,7 +117,7 @@ namespace Schema.Hypermedia.Test
             var getLink = links.First(l => l.Rel == "self");
             var subResourceLink = links.First(l => l.Rel == "hypothetical-subresource");
             Assert.That(getLink.Href, Is.EqualTo("/baseApiUrl/persons/12345"));
-            Assert.That(subResourceLink.Href, Is.EqualTo("/baseApiUrl/persons/12345/honorific/III/testing"));
+            Assert.That(subResourceLink.Href, Is.EqualTo("/baseApiUrl/persons/12345/honorific/III/testing/no-braces"));
 
         }
 

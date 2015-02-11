@@ -57,7 +57,7 @@
     {
         "rel": "hypothetical-subresource",
         "title": "get",
-        "href": "/baseApiUrl/persons/{id}/honorific/{honorificSuffix}/{test}",
+        "href": "/baseApiUrl/persons/{id}/honorific/{honorificSuffix}/{test}/{nobraces}",
         "method": "POST",
         "schema":  ""
     },

@@ -93,6 +93,10 @@ namespace Schema.Hypermedia
                     {
                         replacement = valueCache[match];
                     }
+                    else if (valueCache.ContainsKey(GetParamName(match)))
+                    {
+                        replacement = valueCache[GetParamName(match)];
+                    }
                     else
                     {
                         replacement = GetPropertyValue(match, entity);
@@ -104,9 +108,15 @@ namespace Schema.Hypermedia
         }
 
 
-        protected internal string GetPropertyValue(string match, object entity)
+        private string GetParamName(string match)
         {
             var propName = match.Replace(LeftDelim, string.Empty).Replace(RightDelim, string.Empty);
+            return propName;
+        }
+
+        protected internal string GetPropertyValue(string match, object entity)
+        {
+            var propName = GetParamName(match); 
             
             // Overriding default lookup flags. Make sure all appropriate lookup flags 
             // are specified.
