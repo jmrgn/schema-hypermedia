@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/jmrgn/schema-hypermedia/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/jmrgn/schema-hypermedia</projectUrl>
+    <iconUrl></iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Initial Version</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>Json, Hyperlink, Hypermedia, Hyperschema, Schema</tags>
+  </metadata>
+</package>
