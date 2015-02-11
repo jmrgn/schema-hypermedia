@@ -13,5 +13,9 @@
     <releaseNotes>Initial Version</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>Json, Hyperlink, Hypermedia, Hyperschema, Schema</tags>
+    <language>en-US</language>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="6.0.8" />
+    </dependencies>
   </metadata>
 </package>
