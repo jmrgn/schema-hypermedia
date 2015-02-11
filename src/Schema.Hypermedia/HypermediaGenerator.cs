@@ -44,7 +44,8 @@ namespace Schema.Hypermedia
         }
 
         /// <summary>
-        /// 
+        /// Given an entity and its matching json schema, generate links from templates defined in the schema
+        /// using properties of the entity. 
         /// </summary>
         /// <typeparam name="T">The type of schema and entity</typeparam>
         /// <param name="schema">The schema json in string form</param>
