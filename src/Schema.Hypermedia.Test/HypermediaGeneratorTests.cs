@@ -129,6 +129,21 @@ namespace Schema.Hypermedia.Test
         }
 
         [Test]
+        public void ItShouldALinkRequiringNoSubsstitution()
+        {
+            string expected = "/v1/valid";
+            var links = new List<Link>()
+            { 
+                new Link()
+                {
+                    Href = "/v1/valid"
+                }
+            };
+            generator.EnrichLinksWithData(person, links);
+            Assert.That(links[0].Href, Is.EqualTo(expected));
+        }
+
+        [Test]
         public void ItShouldEnrichALinkWithAdditionalData()
         {
             generator = new HypermediaGenerator(additional);
@@ -171,6 +186,7 @@ namespace Schema.Hypermedia.Test
             person.Id = null;
             Assert.That(() => generator.GetPropertyValue(key, person), Throws.ArgumentException);
         }
+
 
         public static IEnumerable GetLinkTestData()
         {
