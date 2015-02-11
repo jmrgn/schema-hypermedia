@@ -105,7 +105,7 @@ namespace Schema.Hypermedia.Test
             };
             Assert.That(() => generator.ValidateEntity(personSchema, personNoAttr), Throws.ArgumentException);
         }
-
+        
         [Test, TestCaseSource("GetLinkTestData")]
         public void ItShouldGetLinksFromSchema(string schema, int expectedCount)
         {

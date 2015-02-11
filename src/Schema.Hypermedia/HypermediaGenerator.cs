@@ -64,7 +64,6 @@ namespace Schema.Hypermedia
         {
             foreach (var link in links)
             {
-                // step 1, get matches
                 var matches = Regex.Matches(link.Href, RegExp)
                     .Cast<Match>()
                     .Select(m => m.Value)
@@ -73,21 +72,17 @@ namespace Schema.Hypermedia
                 foreach (var match in matches)
                 {
                     var replacement = string.Empty;
-                    // step 2, check dictionary for matches
+                   
+                    // Get and use values from cache if possible
                     if (valueCache.ContainsKey(match))
                     {
-                        // step 3, if found, get value
                         replacement = valueCache[match];
                     }
                     else
                     {
-                        // step 3b. if not, interogate object and get value
                         replacement = GetPropertyValue(match, entity);
-                        // step 3b. 2, add to dictionary. 
                         valueCache.Add(match, replacement);
                     }
-
-                    // do the replacement
                     link.Href = link.Href.Replace(match, replacement);
                 }
             }
@@ -97,18 +92,21 @@ namespace Schema.Hypermedia
         protected internal string GetPropertyValue(string match, object entity)
         {
             var propName = match.Replace(LeftDelim, string.Empty).Replace(RightDelim, string.Empty);
+            
+            // Overriding default lookup flags. Make sure all appropriate lookup flags 
+            // are specified.
             var property = entity.GetType()
                 .GetProperty(propName,
                     BindingFlags.IgnoreCase |
                     BindingFlags.Public |
                     BindingFlags.Instance);
+
             if (property == null)
             {
                 throw new ArgumentException(string.Format("Unable to find property named: {0}", propName));
             }
 
             var value = property.GetValue(entity, null);
-
             if (value == null)
             {
                 throw new ArgumentException(string.Format("The value of property {0} is invalid", propName)); 
