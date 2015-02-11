@@ -106,18 +106,24 @@ namespace Schema.Hypermedia.Test
         }
 
         [Test]
-        public void ItShouldEnrichALinkWithData()
+        public void ItShouldEnrichLinksWithData()
         {
-            string expected = "/v1/12345/John/Doe";
+            var expected = new  [] {"/v1/12345/John/Doe", "/v1/12345/John/Doe/Mr./III"};
+            
             var links = new List<Link>()
             { 
                 new Link()
                 {
                     Href = "/v1/{id}/{givenName}/{familyName}"
+                },
+                new Link()
+                {
+                    Href = "/v1/{id}/{givenName}/{familyName}/{honorificPrefix}/{honorificSuffix}"
                 }
             };
             generator.EnrichLinksWithData(person, links);
-            Assert.That(links[0].Href, Is.EqualTo(expected));
+            Assert.That(links[0].Href, Is.EqualTo(expected[0]));
+            Assert.That(links[1].Href, Is.EqualTo(expected[1]));
         }
 
         [Test]
