@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Linq;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Serialization;
 using NUnit.Framework;
@@ -58,7 +59,8 @@ namespace Schema.Hypermedia.Test
             
             additional = new Dictionary<string, string>
             {
-                {"{nonsense}", "still_nonsense"}
+                {"{nonsense}", "still_nonsense"},
+                {"{test}", "testing"}
             };
         }
 
@@ -102,6 +104,21 @@ namespace Schema.Hypermedia.Test
         {
             var links = generator.GetLinksFromSchema(schema);
             Assert.That(links.Count, Is.EqualTo(expectedCount));
+
+        }
+
+        [Test]
+        public void ItShouldGenerateLinks()
+        {
+            generator = new HypermediaGenerator(additional);
+            var links = generator.GetLinks(rawSchema, person);
+
+            Assert.That(links.Count(), Is.EqualTo(5));
+            var getLink = links.First(l => l.Rel == "self");
+            var subResourceLink = links.First(l => l.Rel == "hypothetical-subresource");
+            Assert.That(getLink.Href, Is.EqualTo("/baseApiUrl/persons/12345"));
+            Assert.That(subResourceLink.Href, Is.EqualTo("/baseApiUrl/persons/12345/honorific/III/testing"));
+
         }
 
         [Test]

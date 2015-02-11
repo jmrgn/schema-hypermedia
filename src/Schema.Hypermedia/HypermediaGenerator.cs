@@ -27,11 +27,13 @@ namespace Schema.Hypermedia
         public HypermediaGenerator(Dictionary<string, string> additionalData)
         {
             this.valueCache = additionalData;
+            Serializer = new JsonSerializer(); ;
         }
 
         public HypermediaGenerator(JsonSerializer serializer)
         {
             this.Serializer = serializer;
+            valueCache = new Dictionary<string, string>();
         }
 
         public HypermediaGenerator(JsonSerializer serializer, Dictionary<string, string> additionalData)
