@@ -54,7 +54,6 @@ namespace Schema.Hypermedia.Test
 
             var helper = new FileHelper();
             rawSchema = helper.GetResourceTextFile("person-schema.json");
-            var jObj = JsonConvert.DeserializeObject(rawSchema); 
             personSchema = JsonSchema.Parse(rawSchema);
             
             additional = new Dictionary<string, string>
@@ -127,7 +126,7 @@ namespace Schema.Hypermedia.Test
         }
 
         [Test]
-        public void ItShouldALinkRequiringNoSubsstitution()
+        public void ItShouldALinkRequiringNoSubstitution()
         {
             string expected = "/v1/valid";
             var links = new List<Link>()
