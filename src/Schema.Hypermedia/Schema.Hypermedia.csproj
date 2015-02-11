@@ -42,6 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HypermediaGenerator.cs" />
+    <Compile Include="Interfaces\IHyperlink.cs" />
+    <Compile Include="Interfaces\IHypermediaResource.cs" />
+    <Compile Include="Interfaces\IHypermediaSchema.cs" />
+    <Compile Include="Models\HypermediaSchema.cs" />
+    <Compile Include="Models\Link.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,37 @@
+﻿{
+  "$schema": "http://json-schema.org/draft-03/schema#",
+  "title": "Person",
+  "type": "object",
+  "properties": {
+    "id": {
+      "title": "Person Id",
+      "description": "Unique identifier for a person",
+      "type": "string",
+      "required": true
+    },
+    "givenName": {
+      "title": "Given Name",
+      "description": "A person's given name",
+      "type": "string",
+      "required": true
+    },
+    "familyName": {
+      "title": "Family Name",
+      "description": "A person's Family Name",
+      "type": "string",
+      "required": true
+    },
+    "honorificPrefix": {
+        "title": "Family Name",
+        "description": "A  person's honorific prefix (e.g. Jr, M.D.)",
+        "type": "string",
+        "required": true
+    },
+    "honorificSuffix": {
+        "title": "Honorific Suffix",
+        "description": "A person's honorific suffix (e.g. Jr, M.D.)",
+        "type": "string",
+        "required": true
+    }
+  }
+}
