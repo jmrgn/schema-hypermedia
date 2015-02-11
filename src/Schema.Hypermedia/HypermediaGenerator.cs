@@ -18,24 +18,40 @@ namespace Schema.Hypermedia
         private const string RegExp = LeftDelim + "(.*?)" + RightDelim;
         private JsonSerializer Serializer { get; set; } 
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public HypermediaGenerator()
         {
             Serializer = new JsonSerializer();
             valueCache = new Dictionary<string, string>();
         }
 
+        /// <summary>
+        /// Constructor allowing for adding additional parameterized data
+        /// </summary>
+        /// <param name="additionalData"></param>
         public HypermediaGenerator(Dictionary<string, string> additionalData)
         {
             this.valueCache = additionalData;
             Serializer = new JsonSerializer(); ;
         }
 
+        /// <summary>
+        /// Constructor allowing for a custom Json serializer to be used
+        /// </summary>
+        /// <param name="serializer"></param>
         public HypermediaGenerator(JsonSerializer serializer)
         {
             this.Serializer = serializer;
             valueCache = new Dictionary<string, string>();
         }
 
+        /// <summary>
+        /// Constructor allowing for a custom serializer and additional parameterized data
+        /// </summary>
+        /// <param name="serializer"></param>
+        /// <param name="additionalData"></param>
         public HypermediaGenerator(JsonSerializer serializer, Dictionary<string, string> additionalData)
         {
             this.Serializer = serializer;
