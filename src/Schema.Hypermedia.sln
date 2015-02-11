@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schema.Hypermedia", "Schema.Hypermedia.csproj", "{71D66DE3-F617-48AD-88BF-DD626240DAF9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schema.Hypermedia", "Schema.Hypermedia\Schema.Hypermedia.csproj", "{71D66DE3-F617-48AD-88BF-DD626240DAF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schema.Hypermedia.Test", "..\Schema.Hypermedia.Test\Schema.Hypermedia.Test.csproj", "{03B72138-150A-4706-9CF5-B6B49A1F3358}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schema.Hypermedia.Test", "Schema.Hypermedia.Test\Schema.Hypermedia.Test.csproj", "{03B72138-150A-4706-9CF5-B6B49A1F3358}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
