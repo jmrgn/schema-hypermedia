@@ -115,5 +115,5 @@ By convention, entities are expected to implement properties matching those defi
 }
 ```
 
-The utility will inspect the schema string, ensure the given entity is valid, and generate a list of links based on a combination of Link templates and entity data.
+The utility will inspect the schema string, ensure the given entity is valid, and generate a list of links based on a combination of Link templates and entity data. The constructor parameter `additionalData` is an optional `Dictionary<string,string>` that allows for additional key/value data to be provided in case a specific link template contains a parameter whose value is not encapsulated by the entity provided. 
 
