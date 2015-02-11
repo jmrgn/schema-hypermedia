@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-
+﻿
 namespace Schema.Hypermedia.Test.Mocks
 {
     public class PersonNoAttr : IHypermediaResource

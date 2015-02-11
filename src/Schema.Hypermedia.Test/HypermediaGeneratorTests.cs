@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Serialization;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 using Schema.Hypermedia.Models;
-using Newtonsoft.Json.Schema;
 using Schema.Hypermedia.Test.Mocks;
 using Schema.Hypermedia.Test.Utility;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Schema.Hypermedia.Test
 {
