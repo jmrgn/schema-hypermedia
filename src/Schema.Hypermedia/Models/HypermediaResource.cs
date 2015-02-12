@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
@@ -18,10 +19,17 @@ namespace Schema.Hypermedia.Models
         public virtual void Validate(JsonSchema schema, JsonSerializer serializer)
         {
             var jObj = JObject.FromObject(this, serializer);
-            IList<string> Resounds = new List<string>();
-            if (!jObj.IsValid(schema, out Resounds))
+            IList<string> reasons = new List<string>();
+            if (!jObj.IsValid(schema, out reasons))
             {
-                throw new ArgumentException("Entity is not valid for the given scehma.");
+                var builder = new StringBuilder("Entity is not valid for the given scehma. Reasons: ");
+                string delim = "";
+                foreach (var reason in reasons)
+                {
+                    builder.Append(delim).Append(reason);
+                    delim = ", ";
+                }
+                throw new ArgumentException(builder.ToString());
             }
         }
     }
