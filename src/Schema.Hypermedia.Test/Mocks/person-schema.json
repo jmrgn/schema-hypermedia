@@ -1,0 +1,72 @@
+﻿{
+  "$schema": "http://json-schema.org/draft-03/schema#",
+  "title": "Person",
+  "type": "object",
+  "properties": {
+    "id": {
+      "title": "Person Id",
+      "description": "Unique identifier for a person",
+      "type": "string",
+      "required": true
+    },
+    "givenName": {
+      "title": "Given Name",
+      "description": "A person's given name",
+      "type": "string",
+      "required": true
+    },
+    "familyName": {
+      "title": "Family Name",
+      "description": "A person's Family Name",
+      "type": "string",
+      "required": true
+    },
+    "honorificPrefix": {
+        "title": "Family Name",
+        "description": "A  person's honorific prefix (e.g. Jr, M.D.)",
+        "type": "string",
+        "required": true
+    },
+    "honorificSuffix": {
+        "title": "Honorific Suffix",
+        "description": "A person's honorific suffix (e.g. Jr, M.D.)",
+        "type": "string",
+        "required": true
+    }
+
+  },
+  "links": [
+    {
+        "rel": "collection",
+        "title": "View all persons",
+        "href": "/baseApiUrl/persons",
+        "method": "GET"
+    },
+    {
+        "rel": "parent",
+        "title": "View all persons",
+        "href": "/baseApiUrl/persons",
+        "method": "GET"
+    },
+    {
+        "rel": "self",
+        "title": "get",
+        "href": "/baseApiUrl/persons/{id}",
+        "method": "POST"
+    },
+    {
+        "rel": "hypothetical-subresource",
+        "title": "get",
+        "href": "/baseApiUrl/persons/{id}/honorific/{honorificSuffix}/{test}/{nobraces}",
+        "method": "POST",
+        "schema":  ""
+    },
+    {
+      "encType": "application/x-www-form-urlencoded",
+      "method": "POST",
+      "rel": "create-form",
+      "title": "Create a new person",
+      "href": "/baseApiUrl/persons"
+    }
+  ]
+}
