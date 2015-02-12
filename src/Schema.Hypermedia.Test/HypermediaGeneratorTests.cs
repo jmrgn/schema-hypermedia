@@ -65,41 +65,6 @@ namespace Schema.Hypermedia.Test
             };
         }
 
-        [Test]
-        public void ItShouldBeValidWithPropertyAttributes()
-        {
-
-            Assert.DoesNotThrow( () => generator.ValidateEntity(personSchema, person)); 
-        }
-
-        [Test]
-        public void ItShouldBeValidWithCustomSerializer()
-        {
-            var serializer = new JsonSerializer
-            {
-                ContractResolver = new CamelCasePropertyNamesContractResolver()
-            };
-
-            generator = new HypermediaGenerator(serializer);
-
-            Assert.DoesNotThrow(() => generator.ValidateEntity(personSchema, person));
-        }
-
-        [Test]
-        public void ItShouldNotBeValidWithoutPropertyAttributes()
-        {
-            var personNoAttr = new PersonNoAttr
-            {
-                FamilyName = "Doe",
-                GivenName = "John",
-                HonorificPrefix = "Mr.",
-                HonorificSuffix = "III",
-                Id = "12345",
-
-            };
-            Assert.That(() => generator.ValidateEntity(personSchema, personNoAttr), Throws.ArgumentException);
-        }
-        
         [Test, TestCaseSource("GetLinkTestData")]
         public void ItShouldGetLinksFromSchema(string schema, int expectedCount)
         {
@@ -172,35 +137,6 @@ namespace Schema.Hypermedia.Test
             generator.EnrichLinksWithData(person, links);
             Assert.That(links[0].Href, Is.EqualTo(expected));
         }
-
-        [TestCase("{id}")]
-        [TestCase("{Id}")]
-        [TestCase("{GivenName}")]
-        [TestCase("{givenName}")]
-        [TestCase("{honorificPrefix}")]
-        [TestCase("{familyname}")]
-        [TestCase("id")]
-        public void ItShouldGetPropertiesByTemplateKey(string key)
-        {
-            var actual = generator.GetPropertyValue(key, person);
-            Assert.That(actual, Is.Not.Null.Or.Empty);
-        }
-
-        [TestCase("{i d}")]
-        [TestCase("{id}")]
-        public void ItShoulHandleANonExistentTemplateKey(string key)
-        {
-            person.Id = null;
-            Assert.That( () => generator.GetPropertyValue(key, person), Throws.ArgumentException);
-        }
-
-        [TestCase("{id}")]
-        public void ItShoulHandleAnInvalidPropertyValue(string key)
-        {
-            person.Id = null;
-            Assert.That(() => generator.GetPropertyValue(key, person), Throws.ArgumentException);
-        }
-
 
         public static IEnumerable GetLinkTestData()
         {

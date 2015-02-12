@@ -1,8 +1,9 @@
 ﻿using Newtonsoft.Json;
+using Schema.Hypermedia.Models;
 
 namespace Schema.Hypermedia.Test.Mocks
 {
-    public class Person : IHypermediaResource
+    public class Person : HypermediaResource
     {
         [JsonProperty("id")]
         public string Id { get; set; }

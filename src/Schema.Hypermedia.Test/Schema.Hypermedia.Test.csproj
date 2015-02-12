@@ -49,7 +49,9 @@
     <Compile Include="HypermediaGeneratorTests.cs" />
     <Compile Include="Mocks\PersonNoAttr.cs" />
     <Compile Include="Mocks\Person.cs" />
+    <Compile Include="Models\HypermediaResourceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReflectionTests.cs" />
     <Compile Include="Utility\FileHelper.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -63,6 +65,7 @@
       <Name>Schema.Hypermedia</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

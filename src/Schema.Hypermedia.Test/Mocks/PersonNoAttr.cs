@@ -1,7 +1,9 @@
 ﻿
+using Schema.Hypermedia.Models;
+
 namespace Schema.Hypermedia.Test.Mocks
 {
-    public class PersonNoAttr : IHypermediaResource
+    public class PersonNoAttr : HypermediaResource
     {
         public string Id { get; set; }
         public string GivenName { get; set; }
