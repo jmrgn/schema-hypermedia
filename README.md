@@ -5,7 +5,7 @@ A lightweight library for using Json Hyperschemas to generate hypermedia links f
 
 Any resource must have a corresponding [Json Hyper-Schema (v4)] (http://tools.ietf.org/html/draft-luff-json-hyper-schema-00)  with a `links` section denoting valid hyperlink templates.
 
-Entities are expected to implement the interface `IHypermediaResource`, an empty Interface acting as a type constraint. The generator uses `JSON.NET` to validate the resource against the schema string provided, using `JSON.NET's` default `JsonSerializer`. The ability to override this serializer is provided via a parameterized constructor or by use of a public property.
+Entities are expected to inherit from the abstract class `HypermediaResource` or implement the interface `IHypermediaResource`. The generator uses `JSON.NET` to validate the resource against the schema string provided, using `JSON.NET's` default `JsonSerializer`. The ability to override this serializer is provided via a parameterized constructor or by use of a public property.
 
 #### Example
 ```CSharp
@@ -115,5 +115,4 @@ By convention, entities are expected to implement properties matching those defi
 }
 ```
 
-The utility will inspect the schema string, ensure the given entity is valid, and generate a list of links based on a combination of Link templates and entity data. The constructor parameter `additionalData` is an optional `Dictionary<string,string>` that allows for additional key/value data to be provided in case a specific link template contains a parameter whose value is not encapsulated by the entity provided. 
-
+The utility will inspect the schema string, ensure the given entity is valid, and generate a list of links based on a combination of Link templates and entity data. The constructor parameter `additionalData` is an optional `Dictionary<string,string>` that allows for additional key/value data to be provided in case a specific link template contains a parameter whose value is not encapsulated by the entity provided. Data should be of the format: Key - `"{property_name}"`, Value - `"property_value`" or Key - `"property_name"`, Value - `"property_value`"  
