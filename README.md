@@ -37,7 +37,7 @@ An alternative is to provide a different `JsonSerializer` to suit different need
      };
 ```
 
-By convention, entities are expected to implement properties matching those defined in the JSON Schema. Casing issues can be resolved via use of the JsonProperty  Hyperlinks are expected to follow the standard curly-bracketed template format to denote route-parameter in the template that should be replaced with a matching property value. `{propertyname}`
+By convention, entities are expected to implement properties matching those defined in the JSON Schema. Casing issues can be resolved via use of the JsonProperty  Hyperlinks are expected to follow the standard curly-bracketed template format to denote route-parameter in the template that should be replaced with a matching property value: `{propertyname}`. Furthermore, optional query string in link hrefs will **not be substitited**: (e.g. `"href": "/baseApiUrl/persons{?prop1,prop2,prop3}"`).
 
 #### Example Schema
 ```json
