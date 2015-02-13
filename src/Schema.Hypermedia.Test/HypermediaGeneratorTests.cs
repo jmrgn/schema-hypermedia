@@ -107,15 +107,16 @@ namespace Schema.Hypermedia.Test
             Assert.That(links[1].Href, Is.EqualTo(expected[1]));
         }
 
-        [Test]
-        public void ItShouldALinkRequiringNoSubstitution()
+
+        [TestCase("/v1/valid")]
+        [TestCase("/v1/valid{?id,familyName}")]
+        public void ItShouldALinkRequiringNoSubstitution(string expected)
         {
-            string expected = "/v1/valid";
             var links = new List<Link>()
             { 
                 new Link()
                 {
-                    Href = "/v1/valid"
+                    Href = expected
                 }
             };
             generator.EnrichLinksWithData(person, links);

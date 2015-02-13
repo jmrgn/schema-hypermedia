@@ -15,7 +15,7 @@ namespace Schema.Hypermedia
         private Dictionary<string, string> valueCache;
         private const string LeftDelim = "{";
         private const string RightDelim = "}";
-        private const string RegExp = LeftDelim + "(.*?)" + RightDelim;
+        private const string RegExp = LeftDelim + @"([^\?].*?)" + RightDelim;
         private JsonSerializer Serializer { get; set; } 
 
         /// <summary>
