@@ -107,6 +107,7 @@ namespace Schema.Hypermedia.Test
             generator.EnrichLinksWithData(person, links);
             Assert.That(links[0].Href, Is.EqualTo(expected[0]));
             Assert.That(links[1].Href, Is.EqualTo(expected[1]));
+            Assert.That(links[2].Href, Is.EqualTo(expected[2]));
         }
 
         [TestCase("/v1/valid")]
