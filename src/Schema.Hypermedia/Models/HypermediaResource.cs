@@ -1,19 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Schema.Hypermedia.Models
 {
     public abstract class HypermediaResource : IHypermediaResource
     {
-        public virtual void Validate(JsonSchema schema)
+        public IEnumerable<Link> Links { get; set; }
+
+        protected abstract JsonSchema Schema { get; }
+
+        public virtual void Validate()
         {
-            Validate(schema, new JsonSerializer());
+            Validate(this.Schema, new JsonSerializer());
+        }
+        public virtual void Validate(JsonSerializer serializer)
+        {
+            Validate(this.Schema, serializer);
         }
 
         public virtual void Validate(JsonSchema schema, JsonSerializer serializer)
