@@ -21,13 +21,15 @@ namespace Schema.Hypermedia
 
             if (property == null)
             {
-                throw new ArgumentException(string.Format("Unable to find property named: {0}", propName));
+                throw new ArgumentException(string.Format("Unable to find property named: {0}. To ignore this,  " +
+                                                          "please specify an Inspection Behavior of Loose.", propName));
             }
 
             var value = property.GetValue(entity, null);
             if (value == null)
             {
-                throw new ArgumentException(string.Format("The value of property {0} is invalid", propName));
+                throw new ArgumentException(string.Format("The value of property {0} is invalid. To ignore this,  " +
+                                                          "please specify an Inspection Behavior of Loose.", propName));
             }
 
             return Convert.ToString(value);

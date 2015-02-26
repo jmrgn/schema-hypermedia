@@ -17,7 +17,10 @@ namespace Schema.Hypermedia.Test.Models
         [SetUp]
         public void SetUp()
         {
-            resource = new Person
+            var helper = new FileHelper();
+            var rawSchema = helper.GetResourceTextFile("person-schema.json");
+            personSchema = JsonSchema.Parse(rawSchema);
+            resource = new Person(personSchema)
             {
                 FamilyName = "Doe",
                 GivenName = "John",
@@ -25,31 +28,26 @@ namespace Schema.Hypermedia.Test.Models
                 HonorificSuffix = "III",
                 Id = "12345",
             };
-
-            var helper = new FileHelper();
-            var rawSchema = helper.GetResourceTextFile("person-schema.json");
-            personSchema = JsonSchema.Parse(rawSchema);
         }
 
         [Test]
         public void ItShouldNotBeValidWithoutPropertyAttributes()
         {
-            var personNoAttr = new PersonNoAttr
+            var personNoAttr = new PersonNoAttr(personSchema)
             {
                 FamilyName = "Doe",
                 GivenName = "John",
                 HonorificPrefix = "Mr.",
                 HonorificSuffix = "III",
-                Id = "12345",
-
+                Id = "12345",               
             };
-            Assert.That(() => personNoAttr.Validate(personSchema), Throws.ArgumentException);
+            Assert.That(() => personNoAttr.Validate(), Throws.ArgumentException);
         }
 
         [Test]
         public void ItShouldBeValidWithPropertyAttributes()
         {
-            Assert.DoesNotThrow(() => resource.Validate(personSchema));
+            Assert.DoesNotThrow(() => resource.Validate());
         }
 
         [Test]

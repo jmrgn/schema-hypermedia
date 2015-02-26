@@ -26,6 +26,9 @@ namespace Schema.Hypermedia.Test
         public void SetUp()
         {
             generator = new HypermediaGenerator();
+            var helper = new FileHelper();
+            rawSchema = helper.GetResourceTextFile("person-schema.json");
+            personSchema = JsonSchema.Parse(rawSchema);
 
             self = new Link()
             {
@@ -43,7 +46,7 @@ namespace Schema.Hypermedia.Test
                 Method = "Get"
             };
 
-            person = new Person
+            person = new Person(personSchema)
             {
                 FamilyName = "Doe",
                 GivenName = "John",
@@ -51,11 +54,6 @@ namespace Schema.Hypermedia.Test
                 HonorificSuffix = "III",
                 Id = "12345",
             };
-            
-
-            var helper = new FileHelper();
-            rawSchema = helper.GetResourceTextFile("person-schema.json");
-            personSchema = JsonSchema.Parse(rawSchema);
             
             additional = new Dictionary<string, string>
             {
@@ -89,24 +87,28 @@ namespace Schema.Hypermedia.Test
         [Test]
         public void ItShouldEnrichLinksWithData()
         {
-            var expected = new  [] {"/v1/12345/John/Doe", "/v1/12345/John/Doe/Mr./III"};
-            
+            var expected = new  [] {"/v1/12345/John", "/v1/12345/John/Doe/Mr./III", "/v1/12345/Johni/Doe"};
+           
             var links = new List<Link>()
             { 
                 new Link()
                 {
-                    Href = "/v1/{id}/{givenName}/{familyName}"
+                    Href = "/v1/{id}/{givenName}"
                 },
                 new Link()
                 {
                     Href = "/v1/{id}/{givenName}/{familyName}/{honorificPrefix}/{honorificSuffix}"
+                },
+                new Link()
+                {
+                    Href = "/v1/{id}/{givenName}/{familyName}"
                 }
             };
             generator.EnrichLinksWithData(person, links);
             Assert.That(links[0].Href, Is.EqualTo(expected[0]));
             Assert.That(links[1].Href, Is.EqualTo(expected[1]));
+            Assert.That(links[2].Href, Is.EqualTo(expected[2]));
         }
-
 
         [TestCase("/v1/valid")]
         [TestCase("/v1/valid{?id,familyName}")]
@@ -121,6 +123,26 @@ namespace Schema.Hypermedia.Test
             };
             generator.EnrichLinksWithData(person, links);
             Assert.That(links[0].Href, Is.EqualTo(expected));
+        }
+
+        [TestCase("/v1/valid/{notavalidproperty}")]
+        [TestCase("/v1/valid/{familyName}")]
+        public void ItShouldNotReturnLinksWithInvalidDataIfBehaviorIsLoose(string expected)
+        {
+            person.FamilyName = null;
+            var links = new List<Link>()
+            { 
+                new Link()
+                {
+                    Href = expected
+                }
+            };
+            generator = new HypermediaGenerator(additional)
+            {
+                InspectionBehavior = InspectionBehavior.Loose
+            };
+            var result = generator.EnrichLinksWithData(person, links);
+            Assert.That(result.Count, Is.EqualTo(0));
         }
 
         [Test]

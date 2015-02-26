@@ -43,7 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HypermediaGenerator.cs" />
+    <Compile Include="InspectionBehavior.cs" />
     <Compile Include="Interfaces\IHyperlink.cs" />
+    <Compile Include="Interfaces\IHypermediaGenerator.cs" />
     <Compile Include="Interfaces\IHypermediaResource.cs" />
     <Compile Include="Interfaces\IHypermediaSchema.cs" />
     <Compile Include="Models\HypermediaResource.cs" />
