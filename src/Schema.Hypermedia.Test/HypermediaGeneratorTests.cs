@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Serialization;
 using NUnit.Framework;
@@ -87,7 +88,7 @@ namespace Schema.Hypermedia.Test
         [Test]
         public void ItShouldEnrichLinksWithData()
         {
-            var expected = new  [] {"/v1/12345/John", "/v1/12345/John/Doe/Mr./III", "/v1/12345/Johni/Doe"};
+            var expected = new  [] {"/v1/12345/John", "/v1/12345/John/Doe/Mr./III", "/v1/12345/John/Doe"};
            
             var links = new List<Link>()
             { 
@@ -105,6 +106,37 @@ namespace Schema.Hypermedia.Test
                 }
             };
             generator.EnrichLinksWithData(person, links);
+            Assert.That(links[0].Href, Is.EqualTo(expected[0]));
+            Assert.That(links[1].Href, Is.EqualTo(expected[1]));
+            Assert.That(links[2].Href, Is.EqualTo(expected[2]));
+        }
+
+        [Test]
+        public void ItShouldEnrichLinksForJObjects()
+        {
+            var expected = new[] { "/v1/12345/John", "/v1/12345/John/Doe/Mr./III", "/v1/12345/John/Doe" };
+            generator = new HypermediaGenerator();
+
+            var json =
+                JObject.Parse(@"{""id"": ""12345"", ""givenName"": ""John"", ""familyName"": ""Doe"", ""honorificPrefix"": ""Mr."", ""honorificSuffix"": ""III""}");
+
+            var links = new List<Link>()
+            { 
+                new Link()
+                {
+                    Href = "/v1/{id}/{givenName}"
+                },
+                new Link()
+                {
+                    Href = "/v1/{id}/{givenName}/{familyName}/{honorificPrefix}/{honorificSuffix}"
+                },
+                new Link()
+                {
+                    Href = "/v1/{id}/{givenName}/{familyName}"
+                }
+            };
+
+            generator.EnrichLinksWithData(json, links);
             Assert.That(links[0].Href, Is.EqualTo(expected[0]));
             Assert.That(links[1].Href, Is.EqualTo(expected[1]));
             Assert.That(links[2].Href, Is.EqualTo(expected[2]));

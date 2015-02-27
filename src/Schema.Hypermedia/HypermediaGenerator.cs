@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 using Schema.Hypermedia.Interfaces;
 using Schema.Hypermedia.Models;
@@ -83,7 +84,32 @@ namespace Schema.Hypermedia
             return links;
         }
 
+        /// <summary>
+        /// Given an entity and its matching json schema, generate links from templates defined in the schema
+        /// using properties of the entity. 
+        /// </summary>
+        /// <param name="schema">The schema json in string form</param>
+        /// <param name="entity">The entity for which the utility generates links for</param>
+        /// <returns></returns>
+        public IEnumerable<Link> GetLinks(string schema, JObject entity)
+        {
+            var links = GetLinksFromSchema(schema);
+
+            EnrichLinksWithData(entity, links);
+            return links;
+        }
+
         protected internal IList<Link> EnrichLinksWithData(IHypermediaResource entity, IList<Link> links)
+        {
+            return EnrichLinksWithData(links, x => Reflection.GetPropertyValue(GetParamName(x), entity));
+        }
+
+        protected internal IList<Link> EnrichLinksWithData(JObject entity, IList<Link> links)
+        {
+            return EnrichLinksWithData(links, x => GetJsonValue(entity, GetParamName(x)));
+        }
+
+        protected internal IList<Link> EnrichLinksWithData(IList<Link> links, Func<string, string> propertyValueSelector)
         {
             var enriched = new List<Link>();
             foreach (var link in links)
@@ -109,11 +135,11 @@ namespace Schema.Hypermedia
                         }
                         else
                         {
-                            replacement = Reflection.GetPropertyValue(GetParamName(match), entity);
+                            replacement = propertyValueSelector(match);
                             valueCache.Add(match, replacement);
                         }
                         link.Href = link.Href.Replace(match, replacement);
-                        
+
                     }
                     enriched.Add(link);
                 }
@@ -126,6 +152,24 @@ namespace Schema.Hypermedia
                 }
             }
             return enriched;
+        }
+
+        protected internal string GetJsonValue(JObject entity, string propertyName)
+        {
+            var replacement = string.Empty;
+
+            JToken value;
+
+            if (entity.TryGetValue(propertyName, out value))
+            {
+                replacement = value.ToString();
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("Property name {0} not present in entity", propertyName));
+            }
+
+            return replacement;
         }
 
         private string GetParamName(string match)
