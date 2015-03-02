@@ -43,6 +43,21 @@ An alternative is to provide a different `JsonSerializer` to suit different need
      };
 ```
 
+Finally, you can also generate links by providing an already validated JSON.NET JObject.  In this case, properties at the root level of the document are matched against the schema properties:
+
+```Csharp	
+	var schema = someProvider.GetSchema();
+
+	string raw = @"{""id"": ""12345"", ""givenName"": ""John"", ""familyName"": ""Doe"", ""honorificPrefix"": ""Mr."", ""honorificSuffix"": ""III""}";
+
+	var json = JObject.Parse(raw);
+
+	var generator = new HypermediaGenerator();
+
+	var links = generator.GetLinks(schema, json);
+
+```
+
 By convention, entities are expected to implement properties matching those defined in the JSON Schema. Casing issues can be resolved via use of the JsonProperty Hyperlinks are expected to follow the standard curly-bracketed template format to denote route-parameter in the template that should be replaced with a matching property value: `{propertyname}`. Furthermore, optional query string in link hrefs will **not be substitited**: (e.g. `"href": "/baseApiUrl/persons{?prop1,prop2,prop3}"`). Default behavior for this substitution is set to Strict, meaning any specified link with a valid route-parameter defined without a matching substitution will produce an `ArgumentException`. This behavior can be overridden by specifying an  `InspectionBehavior` of type `Loose` when instantiating the `HypermediaGenerator`. Any link without matching substitutions will be **omitted** from the result set.
 
 #### Example Schema
