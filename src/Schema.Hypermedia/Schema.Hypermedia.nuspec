@@ -10,7 +10,17 @@
     <projectUrl>https://github.com/jmrgn/schema-hypermedia</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Initial Version</releaseNotes>
+    <releaseNotes>
+    - An interface for the HypermediaGenerator was added for easily mocking in tests.
+
+- A Hyperlink list was added to the HypermediaResource class.
+
+- A Schema property was added to the Hypermedia resource class.
+
+- Strict and Loose substitution behavior can now be specified. 
+
+- More information at https://github.com/jmrgn/schema-hypermedia
+</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>Json, Hyperlink, Hypermedia, Hyperschema, Schema</tags>
     <language>en-US</language>
