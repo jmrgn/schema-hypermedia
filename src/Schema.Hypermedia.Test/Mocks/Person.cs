@@ -6,12 +6,6 @@ namespace Schema.Hypermedia.Test.Mocks
 {
     public class Person : HypermediaResource
     {
-        private JsonSchema schema;
-
-        public Person(JsonSchema schema)
-        {
-            this.schema = schema;
-        }
 
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -28,9 +22,5 @@ namespace Schema.Hypermedia.Test.Mocks
         [JsonProperty("honorificSuffix")]
         public string HonorificSuffix { get; set; }
 
-        protected override JsonSchema Schema
-        {
-            get { return this.schema; }
-        }
     }
 }

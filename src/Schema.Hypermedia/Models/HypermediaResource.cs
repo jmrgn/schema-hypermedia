@@ -12,15 +12,9 @@ namespace Schema.Hypermedia.Models
     {
         public IEnumerable<Link> Links { get; set; }
 
-        protected abstract JsonSchema Schema { get; }
-
-        public virtual void Validate()
+        public void Validate(JsonSchema schema)
         {
-            Validate(this.Schema, new JsonSerializer());
-        }
-        public virtual void Validate(JsonSerializer serializer)
-        {
-            Validate(this.Schema, serializer);
+            Validate(schema, new JsonSerializer());
         }
 
         public virtual void Validate(JsonSchema schema, JsonSerializer serializer)
