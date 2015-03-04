@@ -47,7 +47,7 @@ namespace Schema.Hypermedia.Test
                 Method = "Get"
             };
 
-            person = new Person(personSchema)
+            person = new Person()
             {
                 FamilyName = "Doe",
                 GivenName = "John",

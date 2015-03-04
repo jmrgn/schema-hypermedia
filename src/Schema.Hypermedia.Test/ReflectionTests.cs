@@ -11,7 +11,7 @@ namespace Schema.Hypermedia.Test
         [SetUp]
         public void SetUp()
         {
-            person = new Person(null)
+            person = new Person()
             {
                 FamilyName = "Doe",
                 GivenName = "John",

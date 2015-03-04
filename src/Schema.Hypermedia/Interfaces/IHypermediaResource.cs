@@ -8,8 +8,7 @@ namespace Schema.Hypermedia
     public interface IHypermediaResource
     {
         IEnumerable<Link> Links { get; set; }
-        void Validate();
-        void Validate(JsonSerializer serializer);
+        void Validate(JsonSchema schema);
         void Validate(JsonSchema schema, JsonSerializer serializer);
     }
 }
