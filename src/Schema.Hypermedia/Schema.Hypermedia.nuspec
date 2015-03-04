@@ -10,15 +10,8 @@
     <projectUrl>https://github.com/jmrgn/schema-hypermedia</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>
-    - An interface for the HypermediaGenerator was added for easily mocking in tests.
-
-- A Hyperlink list was added to the HypermediaResource class.
-
-- A Schema property was added to the Hypermedia resource class.
-
-- Strict and Loose substitution behavior can now be specified. 
-
+    <releaseNotes>    
+- Adds support for enriching links for raw JObjects in addition to domain entities.  In this instance, root properties of the JObject are matched against the schema 
 - More information at https://github.com/jmrgn/schema-hypermedia
 </releaseNotes>
     <copyright>Copyright 2015</copyright>
