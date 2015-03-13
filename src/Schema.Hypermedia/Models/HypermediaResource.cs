@@ -12,6 +12,11 @@ namespace Schema.Hypermedia.Models
     {
         public IEnumerable<Link> Links { get; set; }
 
+        protected HypermediaResource()
+        {
+            Links = new List<Link>();
+        }
+
         public void Validate(JsonSchema schema)
         {
             Validate(schema, new JsonSerializer());
