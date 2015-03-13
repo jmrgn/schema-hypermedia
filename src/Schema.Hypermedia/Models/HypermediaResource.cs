@@ -23,7 +23,7 @@ namespace Schema.Hypermedia.Models
             IList<string> reasons = new List<string>();
             if (!jObj.IsValid(schema, out reasons))
             {
-                var builder = new StringBuilder("Entity is not valid for the given scehma. Reasons: ");
+                var builder = new StringBuilder("Entity is not valid for the given schema. Reasons: ");
                 string delim = "";
                 foreach (var reason in reasons)
                 {

@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>    
-- Removed an unnecessary abstract property from HypermediaResource
+- Updated exception message on invalid schema
 - More information at https://github.com/jmrgn/schema-hypermedia
 </releaseNotes>
     <copyright>Copyright 2015</copyright>
